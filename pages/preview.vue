@@ -511,7 +511,7 @@ export default {
       posts: [], // Data dummy
       currentPage: 1,
       itemsPerPage: 9,
-      isLoading: false,
+      isLoading: true,
       totalPages: 0,
     }
   },
@@ -533,6 +533,7 @@ export default {
   methods: {
     async fetchData() {
       try {
+        this.isLoading = true
         let url = `/article/${this.itemsPerPage}/${
           this.currentPage * this.itemsPerPage - this.itemsPerPage
         }`
@@ -549,6 +550,7 @@ export default {
             text: 'Something went wrong!',
           })
         }
+        this.isLoading = false
         this.posts = response.data.data.post
         this.totalPages = Math.ceil(
           response.data.data.count / this.itemsPerPage
