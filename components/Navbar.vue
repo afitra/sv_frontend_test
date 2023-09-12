@@ -39,7 +39,7 @@
 export default {
   methods: {
     changePage(uri) {
-      console.log('>>> ', uri)
+      this.$emit('noedit-event', false)
       this.$router.push({
         path: uri,
       })
