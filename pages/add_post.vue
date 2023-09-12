@@ -61,7 +61,8 @@ export default {
     return {
       form: {
         title: 'tes_title_deh123456789123456789',
-        content: 'Throughout time, randomness was generated through mechanical devices such as dice, coin flips, and playing cards. A mechanical method of achieving randomness can be more time and resource consuming especially',
+        content:
+          'Throughout time, randomness was generated through mechanical devices such as dice, coin flips, and playing cards. A mechanical method of achieving randomness can be more time and resource consuming especially',
         category: 'category1', // Default category
         status: 'Thrash', // Default status
       },
@@ -72,22 +73,16 @@ export default {
       this.form.status = status
       try {
         const response = await this.$axios.post('/article', this.form)
-        console.log(response.data)
-        if(response.data.code =="99"){
-         return Swal.fire({
+        if (response.data.code == '99') {
+          return Swal.fire({
             icon: 'error',
             title: 'Oops...',
             text: 'Something went wrong!',
           })
         }
-        Swal.fire(
-          'Success',
-          'Data saved!',
-          'success'
-        )
-        this.form={}
+        this.form = {}
+        return Swal.fire('Success', 'Data saved!', 'success')
       } catch (error) {
-        console.log(">>> ", error.errors)
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
