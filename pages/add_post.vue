@@ -68,18 +68,7 @@ export default {
   },
   methods: {
     async addPost(status) {
-      this.form.status = status
-      console.log(">>>>", this.form)
-      try {
-        const response = await this.$axios.post('/article', this.form)
-
-        // Handle success
-        console.log('Post added successfully:', response.data)
-      } catch (error) {
-        // Handle error
-        console.error('Error adding post:', error)
-      }
-    },
+    }
   },
 }
 </script>
