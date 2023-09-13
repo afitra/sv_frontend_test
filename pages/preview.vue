@@ -13,7 +13,7 @@
         v-if="!isLoading"
       >
         <!-- Loop through currentPosts -->
-        <div v-for="(post, index) in posts" :key="post.id">
+        <div v-for="(post, index) in posts" :key="index">
           <!-- Card -->
           <div
             class="bg-white rounded-lg border shadow-md max-w-xs md:max-w-none overflow-hidden"
