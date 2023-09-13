@@ -12,7 +12,7 @@
     - nodejs version v16.20.1
 
 ## Installation
-#### Nuxtjs:
+#### Golang:
 
     1. clone repository  https://github.com/afitra/sv_frontend_test.git
     2. masuk ke folder hasil clone
@@ -23,10 +23,14 @@
 ## Documentation
 
 ##### Dokumentasi Route
-- /                 home -> list post table
-- /all_post         home -> list post table
-- /add_post         menambahkan post
-- /preview          list post thumbnail
+ 
+ 
+| Route |   Page   |   Desc |
+| :--- | :-----: | -----: |
+| / |   Home  |    list post table |
+| /all_post | Home |    list post table |
+| /add_post  |  Add  | menambahkan post |
+| /preview  |    Preview   |   list post thumbnail |
 
 #### Note
 
