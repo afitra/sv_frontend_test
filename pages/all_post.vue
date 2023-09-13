@@ -1,7 +1,10 @@
 <template>
   <div class="p-5">
     <Navbar @noedit-event="handleNoEdit" />
-    <h1 v-if="isEdit">editt</h1>
+    <div v-if="isEdit">
+      <h2 class="text-2xl font-semibold mb-4">Edit Post</h2>
+      <Form :isEdit="isEdit" :idEdit="idEdit" @afterEdit-event="handleNoEdit" />
+    </div>
     <div v-if="!isEdit">
       <!-- Tabs -->
       <ul class="flex space-x-4">
@@ -35,25 +38,30 @@
       >
         <thead>
           <tr>
+            <th class="px-4 py-2">Index</th>
             <th class="px-4 py-2">Title</th>
             <th class="px-4 py-2">Category</th>
             <th class="px-4 py-2">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="post in currentPosts" :key="post.id">
+          <tr v-for="(post, index) in currentPosts" :key="post.id">
+            <td class="px-4 py-2">
+              {{ `${currentPage - 1}${index + 1}` }}
+            </td>
             <td class="px-4 py-2">{{ post.title }}</td>
             <td class="px-4 py-2">{{ post.category }}</td>
             <td class="px-4 py-2">
               <button
-                class="px-4 py-2 mx-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md transition duration-300"
+                class="px-4 py-2 bg-blue-500 text-white rounded"
                 @click="editPost(post.id)"
               >
                 Edit
               </button>
               <button
-                class="px-4 py-2 mx-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md transition duration-300"
+                class="px-4 py-2 bg-yellow-400 text-white rounded"
                 @click="moveToTrash(post.id)"
+                v-if="activeTab != 'thrash'"
               >
                 Trash
               </button>
@@ -86,6 +94,7 @@
 import Swal from 'sweetalert2'
 
 import Navbar from '~/components/Navbar.vue'
+import Form from '~/components/Form.vue'
 
 const dummyData = [
   {
@@ -527,6 +536,7 @@ const dummyData = [
 export default {
   components: {
     Navbar,
+    Form,
   },
   data() {
     return {
@@ -536,6 +546,7 @@ export default {
       itemsPerPage: 10,
       isLoading: true,
       isEdit: false,
+      idEdit: 0,
     }
   },
   mounted() {
@@ -554,7 +565,11 @@ export default {
   methods: {
     handleNoEdit(flag) {
       this.isEdit = flag
+      if (flag == false) {
+        this.fetchData(this.activeTab)
+      }
     },
+
     async fetchData(status) {
       try {
         this.isLoading = true
@@ -583,18 +598,24 @@ export default {
     changeTab(tab) {
       this.activeTab = tab
       this.fetchData(tab)
+      this.currentPage = 1
       // Filter posts based on the selected tab (published, drafts, trashed)
     },
     editPost(postId) {
       this.isEdit = true
-      console.log('>>>>> ', postId)
+      this.idEdit = postId
       // Redirect to edit page with postId
     },
     async moveToTrash(postId) {
       // Move the post to the trash
 
       try {
-        const response = await this.$axios.delete(`/article/${postId}`)
+        const dataPost = (await this.$axios.get(`/article/${postId}`)).data.data
+        dataPost.status = 'thrash'
+        const response = await this.$axios.put(
+          `/article/status/${postId}/thrash`,
+          dataPost
+        )
         if (response.data.code == '99') {
           return Swal.fire({
             icon: 'error',
