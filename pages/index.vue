@@ -149,7 +149,7 @@ export default {
         }
 
         this.isLoading = false
-        this.posts = response.data.data
+        this.posts = response.data.data ?? []
         return Swal.fire('Success', 'Data Loaded!', 'success')
       } catch (error) {
         Swal.fire({
