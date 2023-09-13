@@ -1,3 +1,4 @@
+require('dotenv').config()
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -34,8 +35,13 @@ export default {
   axios: {
     proxy: true, // Mengaktifkan proxy
   },
-  proxy: true,
+  proxy: {
+    '/article': 'http://localhost:8080', // Sesuaikan dengan URL server API Anda
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  server: {
+    port: process.env.PORT || 3000, // Gunakan PORT dari .env jika ada, jika tidak, gunakan nilai default (3000)
+  },
 }
