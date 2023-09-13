@@ -12,7 +12,7 @@
     - nodejs version v16.20.1
 
 ## Installation
-#### Golang:
+#### Nuxtjs:
 
     1. clone repository  https://github.com/afitra/sv_frontend_test.git
     2. masuk ke folder hasil clone
