@@ -25,6 +25,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.25.3",
+    "dotenv": "^16.3.1",
     "nuxt": "^2.15.8",
     "sweetalert2": "^11.7.27",
     "vue": "^2.7.10",

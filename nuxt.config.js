@@ -1,28 +1,25 @@
+require('dotenv').config()
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'sv_fronted_test',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'en',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-  ],
+  plugins: [],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -43,6 +40,8 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  }
+  build: {},
+  server: {
+    port: process.env.PORT || 3000, // Gunakan PORT dari .env jika ada, jika tidak, gunakan nilai default (3000)
+  },
 }
